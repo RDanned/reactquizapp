@@ -4,6 +4,7 @@ import {getQuizById} from "../../redux/reducers/quizes/selectors";
 import {getQuestionsByQuizId} from "../../redux/reducers/questions/selectors";
 import AddQuestion from "./AddQuestions";
 import React from "react";
+import QuizQuestions from "./QuizQuestions";
 
 const Quiz = (props:any) => {
     let {id}:any = useParams();
@@ -11,7 +12,6 @@ const Quiz = (props:any) => {
     const quiz = getQuizById(props.state, id);
     const questions = getQuestionsByQuizId(props.state, id);
 
-    console.log(questions);
     return(
         <>
         {!quiz && (<Redirect to="/404"/>)}
@@ -21,16 +21,12 @@ const Quiz = (props:any) => {
                     <h1>{quiz.name}</h1>
                 </div>
             </div>
-            <div className="row justify-content-center">
-                {
-                    questions
-                    ? (<>
-                            {questions.map((question:any)=>(<div className="alert alert-light">{question.content}</div>))}
-                        </>)
-                    : (<div>no questions</div>)
-                }
+            <div className="row">
+                <AddQuestion quizId={quiz.id}/>
             </div>
-            <AddQuestion quizId={quiz.id}/>
+            <div className="row">
+                <QuizQuestions questions={questions}/>
+            </div>
         </div>
         </>
     );

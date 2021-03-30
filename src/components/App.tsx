@@ -1,5 +1,6 @@
 import React from 'react';
 import '../assets/libs/bootstrap/css/bootstrap.css';
+import '../assets/libs/bootstrap-icons/bootstrap-icons.css';
 
 import Header from './Header';
 import Routing from './Routing';

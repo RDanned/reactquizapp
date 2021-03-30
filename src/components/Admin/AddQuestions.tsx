@@ -11,15 +11,17 @@ const AddQuestion = (props:any) => {
     }
 
     const handleSave = (e: React.MouseEvent<HTMLButtonElement>) => {
-        props.addQuestion(content, props.quizId, false);
+        props.addQuestion(content, props.quizId);
     }
 
     return(
         <>
-            <input type="text" onChange={handleChange}/>
-            <button className="btn btn-success" onClick={handleSave}>
-                Add question
-            </button>
+            <div className="col-6">
+                <input className="form-control col-3" type="text" onChange={handleChange}/>
+                <button className="btn btn-success" onClick={handleSave}>
+                    Add question
+                </button>
+            </div>
         </>
     )
 }
