@@ -44,6 +44,7 @@ export default function (state = initialState, action: any) {
         }
         case DELETE_QUIZ: {
             const {id} = action.payload;
+            console.log(state);
             let {[id]:deleted, ...newState} = state.byIds;
             return {
                 ...state,

@@ -5,7 +5,8 @@ import {addQuiz} from "../../redux/reducers/quizes/actions";
 const AddQuize = (props:any) => {
     const [isNewQuiz, setIsNewQuiz] = useState(false);
     const [quizName, setQuizName] = useState("");
-
+    let [isError, setIsError] = useState<boolean>(false)
+    let [error, setError] = useState<string>("");
 
     const handleAdd = () => {
         setIsNewQuiz(true);
@@ -16,8 +17,17 @@ const AddQuize = (props:any) => {
     };
 
     const handleSave = () => {
-        setIsNewQuiz(false);
-        props.addQuiz(quizName);
+
+        if(quizName.length === 0) {
+            setIsError(true);
+            setError("Fill quiz name!");
+        } else {
+            props.addQuiz(quizName);
+            setIsNewQuiz(false);
+            setIsError(false);
+            setQuizName("");
+        }
+
     };
 
     return(
@@ -27,7 +37,8 @@ const AddQuize = (props:any) => {
                 ?
                 (
                     <>
-                        <input type="text" onChange={handleChange}/>
+                        {isError && (<div className="alert alert-danger">{error}</div>)}
+                        <input type="text" onChange={handleChange} value={quizName}/>
                         <button className="btn btn-primary" onClick={handleSave}>save</button>
                     </>
                 )
