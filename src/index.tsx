@@ -4,7 +4,12 @@ import './index.css';
 import App from './components/App';
 import reportWebVitals from './reportWebVitals';
 import {Provider} from "react-redux";
+
 import store from "./redux/store";
+
+store.subscribe(()=>{
+    localStorage.setItem('reduxState', JSON.stringify(store.getState()))
+});
 
 ReactDOM.render(
     <React.StrictMode>

@@ -7,6 +7,13 @@ import Routing from './Routing';
 import Footer from "./Footer";
 import {BrowserRouter as Router} from 'react-router-dom';
 
+/*import store from "../redux/store";
+store.subscribe(()=>{
+    console.log('subs');
+    localStorage.setItem('reduxState', JSON.stringify(store.getState()))
+});*/
+
+
 function App() {
   return (
     <>
