@@ -1,5 +1,4 @@
 import {ADD_QUIZ, CHANGE_QUIZ, DELETE_QUIZ} from "./actionsTypes";
-import {deleteQuestionsByQuizId} from "../questions/actions";
 
 type QuizState = {
     allIds: Array<number>,
@@ -56,7 +55,7 @@ export default function (state = initialState, action: QuizAction) {
             let {[id]:deleted, ...newState} = state.byIds;
             return {
                 ...state,
-                allIds: [...state.allIds.filter((item:number) => item != id)],
+                allIds: [...state.allIds.filter((item:number) => item !== id)],
                 byIds: {
                     ...newState
                 }

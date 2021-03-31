@@ -1,11 +1,9 @@
 import React from 'react';
-import {ChangeEvent, useState} from 'react';
 import {connect} from 'react-redux';
-import {Link} from "react-router-dom";
-import {addQuiz, deleteQuiz} from "../../redux/reducers/quizes/actions";
 import {getQuizes} from "../../redux/reducers/quizes/selectors";
 import Quize from "./Quize";
 import AddQuize from "./AddQuize";
+import { v4 as uuid } from 'uuid';
 
 const Quizes = (props:any) => {
     return(
@@ -16,7 +14,7 @@ const Quizes = (props:any) => {
                     props.quizes && props.quizes.length
                     ? props.quizes.map((quize:any, index:number) => {
                         return (
-                            <Quize quize={quize}/>
+                            <Quize key={uuid()} quize={quize}/>
                         )
                     })
                     : "No quizes"

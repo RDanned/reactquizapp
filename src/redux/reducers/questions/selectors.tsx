@@ -12,8 +12,6 @@ export const getQuestions = (store:any) =>
 
 export const getQuestionsByQuizId = (store:any, quizId:number) => {
     return getQuestions(store).filter((question:any) =>{
-        if(question.quizId == quizId){
-            return question;
-        }
+        return question.quizId === quizId;
     });
 };

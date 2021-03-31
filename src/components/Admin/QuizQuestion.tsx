@@ -1,4 +1,5 @@
 import {useState} from 'react';
+import AddAnswer from "./AddAnswer";
 
 const QuizQuestion = (props:any) => {
     const [isNewAnswer, setIsNewAnswer] = useState<boolean>(false);
@@ -11,9 +12,7 @@ const QuizQuestion = (props:any) => {
     return (
         <>
         <span>{question.content}</span>
-        <button className="btn btn-secondary m-2">
-            <i className="bi bi-plus-circle-fill"></i>
-        </button>
+        <AddAnswer questionId={question.id}/>
         <div>
             no answers
         </div>

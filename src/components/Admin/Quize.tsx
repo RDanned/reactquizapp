@@ -2,6 +2,7 @@ import React, {useState, useEffect} from "react";
 import {Link} from "react-router-dom";
 import {connect} from 'react-redux';
 import {changeQuiz, deleteQuizWithQuestions} from '../../redux/reducers/quizes/actions';
+import { v4 as uuid } from 'uuid';
 
 const Quize = (props:any) => {
     let quize = props.quize;
@@ -32,7 +33,7 @@ const Quize = (props:any) => {
 
     if(isEditing){
         return(
-            <li className="list-group-item list-group-item-action" key={quize.id}>
+            <li className="list-group-item list-group-item-action" key={uuid()}>
                 <input type="text" onChange={handleChange} value={name}/>
                 <span className="m-3 btn btn-danger" onClick={handleSave}>
                     <i className="bi bi-check-square-fill"> </i>

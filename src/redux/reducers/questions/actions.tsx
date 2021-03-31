@@ -12,6 +12,21 @@ export const addQuestion = (content:any, quizId:number) => ({
     }
 });
 
+export const changeQuestion = (id:number, name:string) => ({
+    type: CHANGE_QUESTION,
+    payload: {
+        id: id,
+        name:name
+    }
+})
+
+export const deleteQuestion = (id:number) => ({
+    type: DELETE_QUESTION,
+    payload: {
+        id: id
+    }
+})
+
 export const deleteQuestionsByQuizId = (quizId:number) => ({
    type: DELETE_QUESTIONS_BY_QUIZ_ID,
    payload: {
