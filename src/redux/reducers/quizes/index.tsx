@@ -1,6 +1,7 @@
 import {ADD_QUIZ, CHANGE_QUIZ, DELETE_QUIZ} from "./actionsTypes";
+import {deleteQuestionsByQuizId} from "../questions/actions";
 
-type Quiz = {
+type QuizState = {
     allIds: Array<number>,
     byIds: {
         [id:number]: {
@@ -10,12 +11,20 @@ type Quiz = {
     }
 };
 
-const initialState:Quiz = {
+type QuizAction = {
+    type: string,
+    payload: {
+        id: number,
+        name: string
+    }
+};
+
+const initialState:QuizState = {
     allIds: [],
     byIds: {}
 };
 
-export default function (state = initialState, action: any) {
+export default function (state = initialState, action: QuizAction) {
     switch (action.type) {
         case ADD_QUIZ: {
             const {id, name} = action.payload;
@@ -44,7 +53,6 @@ export default function (state = initialState, action: any) {
         }
         case DELETE_QUIZ: {
             const {id} = action.payload;
-            console.log(state);
             let {[id]:deleted, ...newState} = state.byIds;
             return {
                 ...state,

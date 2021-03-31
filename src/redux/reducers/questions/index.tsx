@@ -1,4 +1,5 @@
-import {ADD_QUESTION} from "./actionsTypes";
+import {ADD_QUESTION, DELETE_QUESTIONS_BY_QUIZ_ID} from "./actionsTypes";
+import {getQuestions} from './selectors';
 
 let initialState = {
     allIds: [],
@@ -21,6 +22,27 @@ export default function(state:any = initialState, action:any){
 
             }
 
+        }
+        case DELETE_QUESTIONS_BY_QUIZ_ID: {
+            const {quizId} = action.payload;
+
+            let newIds:Array<any> = [];
+
+            const newState = state;
+
+            getQuestions({questions: state}).filter((question:any) => {
+                if(question.quizId == quizId){
+                    delete newState.byIds[question.id];
+                } else {
+                    newIds.push(question.id);
+                }
+            });
+
+            return {
+                ...state,
+                allIds: [...newIds],
+                byIds: newState.byIds
+            };
         }
         default:
             return state;

@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from "react";
 import {Link} from "react-router-dom";
 import {connect} from 'react-redux';
-import {deleteQuiz, changeQuiz} from '../../redux/reducers/quizes/actions';
+import {changeQuiz, deleteQuizWithQuestions} from '../../redux/reducers/quizes/actions';
 
 const Quize = (props:any) => {
     let quize = props.quize;
@@ -14,7 +14,7 @@ const Quize = (props:any) => {
     }, []);
 
     const handleDelete = (e: React.MouseEvent<HTMLSpanElement>) => {
-        props.deleteQuiz(quize.id);
+        props.deleteQuizWithQuestions(quize.id);
     }
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -56,4 +56,4 @@ const Quize = (props:any) => {
     }
 }
 
-export default connect(null, {deleteQuiz, changeQuiz})(Quize);
+export default connect(null, {deleteQuizWithQuestions, changeQuiz})(Quize);
