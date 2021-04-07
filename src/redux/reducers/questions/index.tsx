@@ -1,6 +1,12 @@
 import {ADD_QUESTION, CHANGE_QUESTION, DELETE_QUESTION, DELETE_QUESTIONS_BY_QUIZ_ID} from "./actionsTypes";
 import {getQuestions} from './selectors';
 
+type Question = {
+    id: number,
+    quizId: string,
+    content: string
+};
+
 let initialState = {
     allIds: [],
     byIds: {}
@@ -27,19 +33,28 @@ export default function(state:any = initialState, action:any){
             return;
         }
         case DELETE_QUESTION: {
-            return;
+            const {id} = action.payload;
+
+            let {[id]:deleted, ...newState} = state.byIds;
+
+            return {
+                ...state,
+                allIds: [...state.allIds.filter((item:number) => item != id)],
+                byIds: {
+                    ...newState
+                }
+            };
         }
         case DELETE_QUESTIONS_BY_QUIZ_ID: {
             const {quizId} = action.payload;
 
             let newIds:Array<any> = [];
 
-            const newState = state;
+            let newItems:any = {};
 
-            getQuestions({questions: state}).forEach((question:any) => {
-                if(question.quizId === quizId){
-                    delete newState.byIds[question.id];
-                } else {
+            getQuestions({questions: state}).forEach((question:Question) => {
+                if(question.quizId != quizId){
+                    newItems[question.id] = question;
                     newIds.push(question.id);
                 }
             });
@@ -47,7 +62,7 @@ export default function(state:any = initialState, action:any){
             return {
                 ...state,
                 allIds: [...newIds],
-                byIds: newState.byIds
+                byIds: newItems
             };
         }
         default:
