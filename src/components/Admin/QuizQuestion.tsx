@@ -4,12 +4,6 @@ import {deleteQuestion} from "../../redux/reducers/questions/actions";
 import {connect} from "react-redux";
 
 const QuizQuestion = (props:any) => {
-    const [isNewAnswer, setIsNewAnswer] = useState<boolean>(false);
-
-    const handleCreateNewAnswer = () => {
-        setIsNewAnswer(true);
-    }
-
     const handleDelete = (e: React.MouseEvent<HTMLSpanElement>) => {
         props.deleteQuestion(question.id);
     }
